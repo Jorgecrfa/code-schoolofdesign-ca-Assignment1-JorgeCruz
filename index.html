@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- METADATA GOES HERE -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jorge's Spotify Journey</title>
+    <link href="style.css" rel="stylesheet">
+
+    <!-- BOOTSTRAP 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+    <style>
+        body {
+            background-color: rgb(249, 247, 212)
+
+        }
+        h1 {
+            color: rgb(17, 136, 59);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container pt-5">
+        <h1>My Spotify Journey</h1>
+        <p>Music has been constantly in my day to day. Whether I’m commuting, working, or unwinding,
+            Spotify is always playing in the background. Over the years, my listening habits have evolved, shaped by
+            moods, discoveries, and personal experiences. This project is a reflection of my musical journey and the
+            patterns that have defined it.</p>
+    </div>
+    <div class="container pb-5">
+        <h1>Total Minutes Listened (2020-2024) </h1>
+        <p>Since 2020, I have spent a remarkable number of minutes listening to music. Each year tells a different
+            story—some years were filled with long sessions of deep focus music, while others were defined by energetic
+            playlists on repeat. Below is a visualization of my total listening time across the last five years.</p>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'minutes listened on Spotify',
+                        data: [42369, 45697, 48923, 59234, 64321],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        borderWidth: 3,
+                        tension: 0.1,
+                        backgroundColor: ['cyan'],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+    <div class="container pb-5">
+        <h1>My Genre Exploration in 2024</h1>
+        <p>From hip-hop to Colombian indie, from pop to indie rock, my musical taste has expanded significantly. Over
+            time, I’ve seen shifts in my top genres, influenced by new releases, personal recommendations, and the
+            ever-changing rhythm of life. This chart explores how my genre preferences have evolved in 2024.
+        </p>
+        <canvas id="genreChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        const ctxGenre = document.getElementById('genreChart').getContext('2d');
+        const genreChart = new Chart(ctxGenre, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Hip Hop',
+                    'Pop',
+                    'Argentine Trap',
+                    'Colombian Indie',
+                    'Colombian Rock',
+                    'Others',
+                ], datasets: [{
+                    label: 'Favorite Genres of 2024',
+                    data: [25, 22, 20, 18, 11, 4],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235,)',
+                        'rgb(255, 206, 86,)',
+                        'rgb(75, 192, 192,)',
+                        'rgb(153, 102, 255,)',
+                        'rgb(255, 159, 64,)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132)',
+                        'rgba(54, 162, 235)',
+                        'rgba(255, 206, 86)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderWidth: 1
+                }]
+            }, options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    </div>
+    <div class="container pb-5">
+        <h1>The Evolution of My Favorite Artist: Tyler, The Creator </h1>
+        <p>Tyler, The Creator has been a constant presence in my playlists. From the raw and rebellious energy of Goblin
+            to the introspective and genre-bending sound of Call Me If You Get Lost, his music has grown alongside me.
+            This section visualizes how often I’ve listened to Tyler’s albums over the years and highlights key moments
+            in his career that have influenced my listening habits.
+        </p>
+        <div>
+            <canvas id="tylerChart"></canvas>
+        </div>
+        <script>
+            const ctxTyler = document.getElementById('tylerChart').getContext('2d');
+            const tylerChart = new Chart(ctxTyler, {
+                type: 'polarArea',
+                data: {
+                    labels: [
+                        'IGOR',
+                        'Chromakopia',
+                        'Call Me If You Get Lost',
+                        'Others',
+                        'Flowerboy',
+                        'Wolf'
+                    ],
+                    datasets: [{
+                        label: 'Tyler, The Creator Albums',
+                        data: [25, 20, 15, 10, 20, 10],
+                        backgroundColor: [
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)',
+                            'rgba(255, 159, 64)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)',
+                            'rgba(255, 159, 64)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+
+    </div>
+</body>
+
+</html>
